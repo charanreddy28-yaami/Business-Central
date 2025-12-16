@@ -1,6 +1,7 @@
 # Business-Central
 This repository contains an automated ingestion pipeline that extracts data from the Microsoft Dynamics 365 Business Central API and stores it in Azure Data Lake Storage Gen2 (Blob Storage). The pipeline follows an incremental extraction approach to capture only new or updated records, while also supporting full data extraction when filters are not applied. Data from each Business Central object endpoint is saved as a separate CSV file and uploaded to ADLS Gen2. Downstream pipelines are triggered automatically based on file availability.
 
+## Importing necessary Libraries
 import numpy as np
 import re
 import pyodbc
