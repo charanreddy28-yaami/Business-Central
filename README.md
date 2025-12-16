@@ -10,7 +10,7 @@ pd.set_option('display.max_rows', 1000)
 pd.set_option('display.max_columns', 1000)
 pd.set_option('display.width', 1000)
 
-## Connect to LogTag Database
+## Connect to Database
 with open(r"config.json") as in_fil:
     json_conf = json.load(in_fil)
 
@@ -50,7 +50,7 @@ if not data.empty:
         from datetime import datetime, timedelta
         import pandas as pd
 
-        # Step 1: Get the access token
+# Step 1: Get the access token        
         url = "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
         payload = 'client_id={Client_Id}&client_secret={Client_Secret}&scope=https%3A%2F%2Fapi.businesscentral.dynamics.com%2F.default&grant_type=client_credentials'
         headers = {
@@ -80,7 +80,7 @@ if not data.empty:
         }
 
     
-        ## items
+## items Table
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -117,7 +117,7 @@ if not data.empty:
         df.to_json('items.json', orient='records', lines=True)
 
 
-        ## Locations
+## Locations
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -147,7 +147,7 @@ if not data.empty:
         df.to_json('locations.json', orient='records', lines=True)
 
 
-        ## itemCategories
+## itemCategories
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -196,7 +196,7 @@ if not data.empty:
 
         df.to_json('currencyExchangeRates.json', orient='records', lines=True)            
 
-        ## currencies
+## currencies
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -221,7 +221,7 @@ if not data.empty:
         df.to_json('currencies.json', orient='records', lines=True)
 
 
-        ## salesInvoices
+## salesInvoices
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -270,7 +270,7 @@ if not data.empty:
 
         df.to_json('salesInvoices.json', orient='records', lines=True)
 
-        ## salesInvoiceLines
+## salesInvoiceLines
 
         all_sales_invoice_lines = []
 
@@ -330,7 +330,7 @@ if not data.empty:
 
         df.to_json('salesInvoiceLines.json', orient='records', lines=True)
 
-        ## salesCreditMemos
+## salesCreditMemos
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -376,7 +376,7 @@ if not data.empty:
 
         df.to_json('salesCreditMemos.json', orient='records', lines=True)
 
-        ## salesCreditMemoLines
+## salesCreditMemoLines
 
         all_purchase_invoice_lines = []
 
@@ -442,7 +442,7 @@ if not data.empty:
 
         df.to_json('salesCreditMemoLines.json', orient='records', lines=True)
 
-        ## Vendors
+## Vendors
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -476,7 +476,7 @@ if not data.empty:
 
         df.to_json('vendors.json', orient='records', lines=True)
 
-        ## vendorscontactsInformation
+## vendorscontactsInformation
 
         all_item_categories = []
 
@@ -528,7 +528,7 @@ if not data.empty:
         df.to_json('vendContact.json', orient='records', lines=True)
 
 
-        ## PurchaseInvoices
+## PurchaseInvoices
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -576,7 +576,7 @@ if not data.empty:
 
         df.to_json('purchaseInvoices.json', orient='records', lines=True)
 
-        ## purchaseInvoiceLines
+## purchaseInvoiceLines
 
         all_purchase_order_lines = []
 
@@ -639,7 +639,7 @@ if not data.empty:
 
         df.to_json('purchaseInvoiceLines.json', orient='records', lines=True)
 
-        ## GeneralLedgerEntries
+## GeneralLedgerEntries
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -669,7 +669,7 @@ if not data.empty:
 
         df.to_json('generalLedgerEntries.json', orient='records', lines=True)
 
-        ## paymentTerms
+## paymentTerms
         for company_id in company_ids:
             # Construct the URL for the specific company
             url = f"{base_url}({company_id})/paymentTerms"
@@ -687,7 +687,7 @@ if not data.empty:
         df.to_json('paymentTerms.json', orient='records', lines=True) 
 
 
-        ## unitsOfMeasure
+## unitsOfMeasure
         for company_id in company_ids:
             # Construct the URL for the specific company
             url = f"{base_url}({company_id})/unitsOfMeasure"
@@ -704,7 +704,7 @@ if not data.empty:
         df = df.drop(columns=['@odata.etag'])
         df.to_json('unitsOfMeasure.json', orient='records', lines=True)    
 
-        ## Accounts
+## Accounts
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -795,8 +795,7 @@ if not data.empty:
         # # Step 5: Export the DataFrame to JSON
         # df.to_json('TrialBalances.json', orient='records', lines=True)
 
-
-        ## salesShipments
+## salesShipments
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -815,7 +814,7 @@ if not data.empty:
             df = df.drop(columns=['@odata.etag'])
         df.to_json('salesShipments.json', orient='records', lines=True)
 
-        ## salesShipmentLines
+## salesShipmentLines
 
         all_purchase_order_lines = []
 
@@ -870,7 +869,7 @@ if not data.empty:
 
         df.to_json('salesShipmentLines.json', orient='records', lines=True)
 
-        ## shipmentMethods
+## shipmentMethods
 
         for company_id in company_ids:
             # Construct the URL for the specific company
@@ -893,7 +892,7 @@ if not data.empty:
                 ]
         df.to_json('shipmentMethods.json', orient='records', lines=True)
 
-        ##   WEBSERVICE ODATA ENDPOINTS DATA EXTRACTION
+##   WEBSERVICE ODATA ENDPOINTS DATA EXTRACTION
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/CustomersList"
 
@@ -935,7 +934,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-        ## Salespersons
+## Salespersons
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/Salespersons"
 
@@ -977,8 +976,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")    
 
-
-        ## VendorCard
+## VendorCard
         base_url= "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})"
         url = f"{base_url}/VendorsList"
             
@@ -999,7 +997,7 @@ if not data.empty:
         df.to_json('VendorCard.json', orient='records', lines=True)
 
 
-        ## ItemLedgerEntries
+## ItemLedgerEntries
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/ItemLedgerEntries"
 
@@ -1041,7 +1039,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")    
 
-        ## PurchaseCreditMemo
+## PurchaseCreditMemo
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseCreditMemo"
 
@@ -1084,7 +1082,7 @@ if not data.empty:
             print(f"An error occurred: {e}")  
 
 
-        ## PurchaseCreditMemoLine
+## PurchaseCreditMemoLine
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseCreditMemoLines"
 
@@ -1125,8 +1123,8 @@ if not data.empty:
             print(f"Response content: {response.text}")
         except Exception as e:
             print(f"An error occurred: {e}")  
-
-        ## PostedPurchaseCreditMemo
+            
+## PostedPurchaseCreditMemo
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedPurchaseCreditMemo"
@@ -1169,7 +1167,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")    
 
-        ## PostedPurchaseCrMemoLines
+## PostedPurchaseCrMemoLines
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedPurchaseCrMemoLines"
@@ -1255,7 +1253,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## CustomerLedgerEntries
+## CustomerLedgerEntries
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/CustomerLedgerEntries"
@@ -1298,7 +1296,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## VendorLedgerEntriesDetails
+## VendorLedgerEntriesDetails
 
         # Construct the URL for the specific company
 
@@ -1342,7 +1340,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## VendorLedgerEntries
+## VendorLedgerEntries
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/VendorLedgerEntries"
@@ -1385,7 +1383,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## ValueEntries
+## ValueEntries
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/ValueEntries"
@@ -1428,7 +1426,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## Chart of Accounts
+## Chart of Accounts
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/Chart_of_Accounts"
@@ -1471,7 +1469,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## PostedPurchaseReceipt
+## PostedPurchaseReceipt
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedPurchaseReceipt"
@@ -1514,7 +1512,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        # ## PostedPurchaseReceipts
+# PostedPurchaseReceipts
 
         # base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedPurchaseReceipts"
         # # List to store all records
@@ -1544,7 +1542,7 @@ if not data.empty:
 
         # df.to_json('PostedPurchaseReceipts.json', orient='records', lines=True)
 
-        ## PostedPurchaseReceiptLines
+## PostedPurchaseReceiptLines
 
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedPurchaseReceiptLines"
@@ -1630,7 +1628,7 @@ if not data.empty:
             print(f"An error occurred: {e}")
 
 
-        ## PostedReturnShipmentLines
+## PostedReturnShipmentLines
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedReturnShipmentLines"
 
@@ -1672,10 +1670,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
-
-
-        ## PostedReturnReceipts
+## PostedReturnReceipts
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedReturnReceipts"
 
@@ -1717,9 +1712,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
-
-        ## PostedReturnReceiptSubform
+## PostedReturnReceiptSubform
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PostedReturnReceiptSubform"
 
@@ -1761,8 +1754,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-        ## PurchaseHeader
-
+## PurchaseHeader
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseHeader"
 
@@ -1804,8 +1796,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-
-        ## PurchaseHeaderHistory
+## PurchaseHeaderHistory
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseOrderHistory"
 
@@ -1847,8 +1838,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
-        ## PurchaseLine
+## PurchaseLine
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseLine"
 
@@ -1890,8 +1880,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-
-        ## PurchaseLineHistory
+## PurchaseLineHistory
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/PurchaseLineHistory"
 
@@ -1933,9 +1922,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
-        ## SalesLine
-
+## SalesLine
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/SalesLine"
 
@@ -1977,9 +1964,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-
-        ## SalesLineHistory
-
+## SalesLineHistory
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/SalesLineHistory"
 
@@ -2021,8 +2006,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## SalesOrder
-
+## SalesOrder
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/SalesOrder"
 
@@ -2064,8 +2048,7 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        ## SalesOrderHistory
-
+## SalesOrderHistory
 
         base_url = "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/ODataV4/Company(/{compayId})/SalesOrderHistory"
 
@@ -2107,8 +2090,8 @@ if not data.empty:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
-        # uploading into blob
-        # Azure Storage Account connection string
+# uploading into blob
+# Azure Storage Account connection string
         import datetime
         from azure.storage.blob import BlobServiceClient
 
